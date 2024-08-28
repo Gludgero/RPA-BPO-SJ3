@@ -3,6 +3,8 @@ import time as tm
 
 ### (Fazer depois) Abrir o sistema, planilha
 
+empresaAtual = "5" ### Lúdico
+
 def sleep1():
     tm.sleep(1)
 
@@ -39,6 +41,15 @@ def abrirGoogle():
     py.click(410, 1058)
     sleep2
 
+def selectEmpresa():
+    sleep2()
+    sleep2()
+    py.press('backspace')
+    sleep1
+    py.write(empresaAtual)
+    sleep1
+    py.press('enter')
+
 
 
 
@@ -53,37 +64,41 @@ def main():
 
     #abrirCARdoMenu()
 
-    ### Checar se os lançamentos da planilha já não estão lançados
+        ### Checar se os lançamentos da planilha já não estão lançados
+
+        ### Selecionar "lançamentos" e "títulos"
 
     SelectLancTitulos()
 
-    ### Selecionar a empresa
+        ### Selecionar a empresa
 
-    ### Selecionar o cliente
+    selectEmpresa()
 
-    ### Selecionar a serie
+        ### Selecionar o cliente
 
-    ### Selecionar a data
+        ### Selecionar a serie
 
-    ### Selecionar o portador (banco)
+        ### Selecionar a data
 
-    ### Selecionar a conta gerencial 
+        ### Selecionar o portador (banco)
 
-    ### Selecionar o valor 
+        ### Selecionar a conta gerencial 
 
-    ### Selecionar parcela 1
+        ### Selecionar o valor 
 
-    ### colocar a mesma data que as outras (por enquanto)
+        ### Selecionar parcela 1
 
-    ### Colocar a obs com o historico da planilha, sem lanc sj3
+        ### colocar a mesma data que as outras (por enquanto)
 
-    ### Salvar
+        ### Colocar a obs com o historico da planilha, sem lanc sj3
 
-    ### Pintar a planilha
+        ### Salvar
 
-    ### Ir para a próxima linha da planilha 
+        ### Pintar a planilha
 
-    ### reiniciar 
+        ### Ir para a próxima linha da planilha 
+
+        ### reiniciar 
 
      
 
