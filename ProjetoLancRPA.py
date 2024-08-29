@@ -4,6 +4,13 @@ import time as tm
 ### (Fazer depois) Abrir o sistema, planilha
 
 empresaAtual = "5" ### Lúdico
+clienteAtual = "xxx"
+serieAtual = "DRE"
+dataAtual = "28082024"
+portadorAtual = "6"
+contaAtual = 'x'
+valorAtual = 'xxxx'
+obs = 'x'
 
 def sleep1():
     tm.sleep(1)
@@ -50,6 +57,71 @@ def selectEmpresa():
     sleep1
     py.press('enter')
 
+def selectCliente():
+    ### Selecionar o cliente
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write(clienteAtual)
+    sleep1()
+    py.press('enter')
+    sleep1()
+
+def selectSerie():
+     ### Selecionar a serie
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write(serieAtual)
+    sleep1()
+    py.press('enter')
+    sleep1()
+
+def tabPrintData():
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write(dataAtual)
+
+def selectPortador():
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write(portadorAtual)
+    sleep1()    
+    py.press('enter')
+    sleep1()
+
+def selectConta():
+    ### Verificar a quantidade de tabs
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write(contaAtual)
+    sleep1()
+def selectValor():
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write(valorAtual)
+    sleep1()
+def selectParcelas():
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write("1")
+    sleep1()
+def selectOBS():
+    sleep1()
+    py.press('tab')
+    sleep1()
+    py.write(obs)
+    sleep1()
+
+def salvaLanc():
+    sleep1()
+    py.cick(alguma coisaaaaaaaa)
+    sleep2()
 
 
 
@@ -62,37 +134,34 @@ def main():
 
     ################## Sessão Contas A Receber
 
-    #abrirCARdoMenu()
+    abrirCARdoMenu()
 
         ### Checar se os lançamentos da planilha já não estão lançados
 
-        ### Selecionar "lançamentos" e "títulos"
+    SelectLancTitulos() ### Selecionar "lançamentos" e "títulos"
 
-    SelectLancTitulos()
+    selectEmpresa() ### Selecionar a empresa
 
-        ### Selecionar a empresa
+    selectCliente() ### Selecionar o cliente
 
-    selectEmpresa()
+    selectSerie()  ### Seleciona a serie
 
-        ### Selecionar o cliente
+    tabPrintData()    ### Selecionar a data 2 vezes
+    tabPrintData()
+    
+    selectPortador() ### Selecionar o portador (banco)
 
-        ### Selecionar a serie
+    selectConta() ### Selecionar a conta gerencial 
 
-        ### Selecionar a data
+    selectValor() ### Selecionar o valor 
 
-        ### Selecionar o portador (banco)
+    selectParcelas() ### Selecionar parcela 1
 
-        ### Selecionar a conta gerencial 
+    tabPrintData() ### colocar a mesma data que as outras (por enquanto)
 
-        ### Selecionar o valor 
+    selectOBS() ### Colocar a obs com o historico da planilha, sem lanc sj3
 
-        ### Selecionar parcela 1
-
-        ### colocar a mesma data que as outras (por enquanto)
-
-        ### Colocar a obs com o historico da planilha, sem lanc sj3
-
-        ### Salvar
+    salvaLanc() ### Salvar
 
         ### Pintar a planilha
 
