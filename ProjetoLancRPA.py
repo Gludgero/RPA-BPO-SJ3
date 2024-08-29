@@ -4,13 +4,15 @@ import time as tm
 ### (Fazer depois) Abrir o sistema, planilha
 
 empresaAtual = "5" ### Lúdico
-clienteAtual = "xxx"
+clienteAtual = "FDI"
 serieAtual = "DRE"
 dataAtual = "28082024"
-portadorAtual = "6"
-contaAtual = 'x'
-valorAtual = 'xxxx'
-obs = 'x'
+portadorAtual = "4"
+contaAtual = '385'
+valorAtual = ' 500,00 '
+obs = 'HOLDING FABRICA DE IDEIAS LTDA'
+prompt = ""
+i = 0
 
 def sleep1():
     tm.sleep(1)
@@ -28,10 +30,15 @@ def fecharSistema():
 def abrirCARdoMenu():
     ### Selecionar o CAR na primeira tela de menu
     sleep2()
+    sleep2()
     py.click(922, 434)
 
 def SelectLancTitulos():
     ### Selecionar lançamentos, 
+    sleep2()
+    sleep2()
+    sleep2()
+    sleep2()
     sleep2()
     py.click(65, 808)
     ### títulos a receber
@@ -70,22 +77,22 @@ def selectCliente():
 def selectSerie():
      ### Selecionar a serie
     sleep1()
-    py.press('tab')
-    sleep1()
+    #py.press('tab')
+    #sleep1()
     py.write(serieAtual)
     sleep1()
     py.press('enter')
     sleep1()
 
-def tabPrintData():
-    sleep1()
-    py.press('tab')
+def PrintDataTab():
     sleep1()
     py.write(dataAtual)
-
-def selectPortador():
     sleep1()
     py.press('tab')
+
+def selectPortador():
+    # sleep1()
+    # py.press('tab')
     sleep1()
     py.write(portadorAtual)
     sleep1()    
@@ -99,28 +106,37 @@ def selectConta():
     sleep1()
     py.write(contaAtual)
     sleep1()
-def selectValor():
+    py.press('enter')
     sleep1()
-    py.press('tab')
+
+def selectValor():
     sleep1()
     py.write(valorAtual)
     sleep1()
+
 def selectParcelas():
+    sleep1()
+    py.press('tab')
     sleep1()
     py.press('tab')
     sleep1()
     py.write("1")
     sleep1()
+    py.press('enter')
+    sleep1()
+
 def selectOBS():
-    sleep1()
-    py.press('tab')
-    sleep1()
+    while(i != 8):
+        py.press('tab')
+        sleep1()
+        i = i + 1
+        
     py.write(obs)
     sleep1()
 
 def salvaLanc():
     sleep1()
-    py.cick(alguma coisaaaaaaaa)
+    py.cick()
     sleep2()
 
 
@@ -146,8 +162,8 @@ def main():
 
     selectSerie()  ### Seleciona a serie
 
-    tabPrintData()    ### Selecionar a data 2 vezes
-    tabPrintData()
+    PrintDataTab()    ### Selecionar a data 2 vezes
+    PrintDataTab()
     
     selectPortador() ### Selecionar o portador (banco)
 
@@ -157,11 +173,14 @@ def main():
 
     selectParcelas() ### Selecionar parcela 1
 
-    tabPrintData() ### colocar a mesma data que as outras (por enquanto)
+    PrintDataTab() ### colocar a mesma data que as outras (por enquanto)
 
     selectOBS() ### Colocar a obs com o historico da planilha, sem lanc sj3
 
-    salvaLanc() ### Salvar
+    prompt = py.prompt(text="Digite abaixo -salvar- para confirmar o lançamento?")
+
+    if(prompt == salvar):
+        salvaLanc() ### Salvar
 
         ### Pintar a planilha
 
@@ -176,7 +195,6 @@ def main():
 
 
     fecharSistema()
-
 
 main()
 
