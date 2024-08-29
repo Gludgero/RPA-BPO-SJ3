@@ -4,15 +4,14 @@ import time as tm
 ### (Fazer depois) Abrir o sistema, planilha
 
 empresaAtual = "5" ### Lúdico
-clienteAtual = "FDI"
+clienteAtual = py.prompt(text="Qual o cliente atual?")
 serieAtual = "DRE"
 dataAtual = "28082024"
 portadorAtual = "4"
-contaAtual = '385'
-valorAtual = ' 500,00 '
-obs = 'HOLDING FABRICA DE IDEIAS LTDA'
+contaAtual = py.prompt(text="Qual a conta atual?")
+valorAtual = py.prompt(text="Qual o valor atual?")
+obs = py.prompt(text="Qual a obs atual?")
 prompt = ""
-i = 0
 
 def sleep1():
     tm.sleep(1)
@@ -58,6 +57,7 @@ def abrirGoogle():
 def selectEmpresa():
     sleep2()
     sleep2()
+    py.doubleClick()
     py.press('backspace')
     sleep1
     py.write(empresaAtual)
@@ -126,11 +126,12 @@ def selectParcelas():
     sleep1()
 
 def selectOBS():
+    i = 0
     while(i != 8):
         py.press('tab')
         sleep1()
         i = i + 1
-        
+
     py.write(obs)
     sleep1()
 
@@ -139,20 +140,7 @@ def salvaLanc():
     py.cick()
     sleep2()
 
-
-
-
-def main():
-    py.alert(text="Cuidado com seu mouse e Teclado, o programa vai rodar!")
-    sleep1
-
-    abrirGoogle()
-
-    ################## Sessão Contas A Receber
-
-    abrirCARdoMenu()
-
-        ### Checar se os lançamentos da planilha já não estão lançados
+def lancRecebimentos():
 
     SelectLancTitulos() ### Selecionar "lançamentos" e "títulos"
 
@@ -162,7 +150,7 @@ def main():
 
     selectSerie()  ### Seleciona a serie
 
-    PrintDataTab()    ### Selecionar a data 2 vezes
+    PrintDataTab() ### Selecionar a data 2 vezes
     PrintDataTab()
     
     selectPortador() ### Selecionar o portador (banco)
@@ -179,22 +167,23 @@ def main():
 
     prompt = py.prompt(text="Digite abaixo -salvar- para confirmar o lançamento?")
 
-    if(prompt == salvar):
+    if(prompt == "salvar"):
         salvaLanc() ### Salvar
 
-        ### Pintar a planilha
-
-        ### Ir para a próxima linha da planilha 
-
-        ### reiniciar 
-
-     
 
 
 
+def main():
+    py.alert(text="Cuidado com seu mouse e Teclado, o programa vai rodar!")
+    sleep1
 
+    #abrirCARdoMenu()
 
-    fecharSistema()
+    #py.alert(text="Você confirmou se alguns dos lançamentos já foram feitos?" )  ### Checar se os lançamentos da planilha já não estão lançados
+
+    lancRecebimentos()
+
+    fecharSistema() 
 
 main()
 
