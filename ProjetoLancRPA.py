@@ -11,6 +11,7 @@ portadorAtual = "4"
 contaAtual = py.prompt(text="Qual a conta atual?")
 valorAtual = py.prompt(text="Qual o valor atual?")
 obs = py.prompt(text="Qual a obs atual?")
+nLinhas = 0
 prompt = ""
 
 def sleep1():
@@ -170,6 +171,16 @@ def lancRecebimentos():
     if(prompt == "salvar"):
         salvaLanc() ### Salvar
 
+def minimizaVScode():
+    sleep1
+    py.click(1804, 17)
+    sleep1
+
+
+def receberValores():
+    sleep1()
+    nLinhas = py.prompt(text="Qual o número de lançamentos você quer fazer?")
+
 
 
 
@@ -177,10 +188,12 @@ def main():
     py.alert(text="Cuidado com seu mouse e Teclado, o programa vai rodar!")
     sleep1
 
+    minimizaVScode()
+
     #abrirCARdoMenu()
 
-    #py.alert(text="Você confirmou se alguns dos lançamentos já foram feitos?" )  ### Checar se os lançamentos da planilha já não estão lançados
-
+    #py.alert(text="Você confirmou se alguns dos lançamentos já foram feitos?" )  
+    
     lancRecebimentos()
 
     fecharSistema() 
