@@ -1,30 +1,33 @@
 import pyautogui as py ### Fazendo o código a partir da ideia do arquivo exe
 import time as tm
 
-### (Fazer depois) Abrir o sistema, planilha   
+empresa_atual = ''
+cliente_atual = ''
+serie_atual = ''
+data_atual = ''
+portador_atual = ''
+codigo_atual = ''
+valor_atual = ''
+obs_atual = ''
+cont = 0
 
-empresaAtual = "3" ### 
+dict_lancamentos = [] #{'empresa': empresa_atual, 'cliente': cliente_atual, 'serie': serie_atual, 'data': data_atual, 'portador': portador_atual, 'codigo': codigo_atual, 'valor': valor_atual, 'obs': obs_atual}
 
-#clienteAtual = py.prompt(text="Qual o cliente atual?") ##################################
-clienteAtual = "MEGA"
+def receber_valores():
 
-#serieAtual = "DRE" 
-serieAtual = 'DPA'
+    empresa_atual = py.prompt("Digite o nome da próxima empresa")
+    cliente_atual = py.prompt("Digite o nome do próximo cliente")
+    serie_atual = py.prompt("Digite a próxima serie ")
+    data_atual = py.prompt("Digite a data utilizada")
+    portador_atual = py.prompt("Digite o codigo do portador")
+    codigo_atual = py.prompt("Digite o codigo gerencial")
+    valor_atual = py.prompt("Digite o valor")
+    obs_atual = py.prompt("Digite a OBS")
 
-dataAtual = "30082024"
+    novo_lancamento = {'empresa': empresa_atual, 'cliente': cliente_atual, 'serie': serie_atual, 'data': data_atual, 'portador': portador_atual, 'codigo': codigo_atual, 'valor': valor_atual, 'obs': obs_atual}
 
-portadorAtual = "4"
+    dict_lancamentos.append(novo_lancamento)
 
-#contaAtual = py.prompt(text="Qual a conta atual?") ##############################
-contaAtual = "99"
-
-#valorAtual = py.prompt(text="Qual o valor atual?") ########################
-valorAtual = "2591,50"
-
-#obs = py.prompt(text="Qual a obs atual?") ########################################
-obs = "NOVA MEGA G ATACADISTA DE A"
-
-nLinhas = 0
 prompt = ""
 
 def sleep1():
@@ -80,7 +83,7 @@ def selectEmpresa():
     py.doubleClick()
     py.press('backspace')
     sleep1
-    py.write(empresaAtual)
+    py.write(dict_lancamentos[cont]['empresa'])
     sleep1
     py.press('enter')
 
@@ -89,7 +92,7 @@ def selectCliente():
     sleep1()
     py.press('tab')
     sleep1()
-    py.write(clienteAtual)
+    py.write(dict_lancamentos[cont]['cliente'])
     sleep1()
     py.press('enter')
     sleep1()
@@ -99,14 +102,14 @@ def selectSerie():
     sleep1()
     #py.press('tab')
     #sleep1()
-    py.write(serieAtual)
+    py.write(dict_lancamentos[cont]['serie'])
     sleep1()
     py.press('enter')
     sleep1()
 
 def PrintDataTab():
     sleep1()
-    py.write(dataAtual)
+    py.write(dict_lancamentos[cont]['data'])
     sleep1()
     py.press('tab')
 
@@ -114,7 +117,7 @@ def selectPortador():
     # sleep1()
     # py.press('tab')
     sleep1()
-    py.write(portadorAtual)
+    py.write(dict_lancamentos[cont]['portador'])
     sleep1()    
     py.press('enter')
     sleep1()
@@ -124,14 +127,14 @@ def selectConta():
     sleep1()
     py.press('tab')
     sleep1()
-    py.write(contaAtual)
+    py.write(dict_lancamentos[cont]['codigo'])
     sleep1()
     py.press('enter')
     sleep1()
 
 def selectValor():
     sleep1()
-    py.write(valorAtual)
+    py.write(dict_lancamentos[cont]['valor'])
     sleep1()
 
 def selectParcelas():
@@ -152,7 +155,7 @@ def selectObsRecebimentos():
         sleep1()
         i = i + 1
 
-    py.write(obs)
+    py.write(dict_lancamentos[cont]['obs'])
     sleep1()
 
 def selectObsPagamentos():
@@ -162,12 +165,12 @@ def selectObsPagamentos():
         sleep1()
         i = i + 1
 
-    py.write(obs)
+    py.write(dict_lancamentos[cont]['obs'])
     sleep1()
 
 def salvaLanc():
     sleep1()
-    py.click()
+    py.click(252, 209)
     sleep2()
 
 def lancRecebimentos():
@@ -237,17 +240,19 @@ def minimizaVScode():
     py.click(1804, 17)
     sleep2
 
-def receberValores():
-    sleep1()
-    nLinhas = py.prompt(text="Qual o número de lançamentos você quer fazer?")
-
 def main():
-
+    bool = True
     sleep1
     py.alert(text="Cuidado com seu mouse e Teclado, o programa vai rodar!")
     sleep1
 
-    minimizaVScode()
+    while bool == True:
+        receber_valores() 
+        s_n = py.prompt('Adicionar novo lançamento a fila? S / N')
+        if s_n == 'S' or s_n == 's':
+            bool = True 
+        else: 
+            bool = False
 
     #abrirCARdoMenu()
 
@@ -257,7 +262,15 @@ def main():
 
     lancPagamentos() ### Adicionar algo pra limpar a caixa de condições de pagamento 
 
-    fecharSistema() 
+    teste = py.prompt('de novo? - sim - ')
+
+    if teste == 'sim':
+        cont = cont + 1
+        main()
+
+    else: fecharSistema()  
+
+minimizaVScode()
 
 main()
 
