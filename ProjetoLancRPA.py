@@ -15,9 +15,9 @@ dict_lancamentos = [] #{'empresa': empresa_atual, 'cliente': cliente_atual, 'ser
 
 def receber_valores():
 
-    empresa_atual = py.prompt("Digite o nome da próxima empresa")
-    cliente_atual = py.prompt("Digite o nome do próximo cliente")
-    serie_atual = py.prompt("Digite a próxima serie ")
+    empresa_atual = py.prompt("Digite o nome da empresa ")
+    cliente_atual = py.prompt("Digite o nome do cliente (Certifique-se que o nome escrito é exatamente como está cadastrado no sistema, caso contrário o Leo2D2 não irá encontrar)")
+    serie_atual = py.prompt("Digite a serie ")
     data_atual = py.prompt("Digite a data utilizada")
     portador_atual = py.prompt("Digite o codigo do portador")
     codigo_atual = py.prompt("Digite o codigo gerencial")
@@ -170,10 +170,10 @@ def selectObsPagamentos():
 
 def salvaLanc():
     sleep1()
-    py.click(252, 209)
+    #py.click(252, 209)
     sleep2()
 
-def lancRecebimentos():
+def lancRecebimentos(): ### Adicionar algo pra limpar a caixa de condições de pagamento 
 
     SelectLancTitulosCAR() ### Selecionar "lançamentos" e "títulos"
 
@@ -240,11 +240,39 @@ def minimizaVScode():
     py.click(1804, 17)
     sleep2
 
+def prompt_P_R():
+    p_r = py.prompt('Os lançamentos são pagamentos ou recebimentos? P / R')
+
+def chama_func_P_R():
+    if p_r == 'P' or p_r == 'p':
+        lancPagamentos()
+        avalia_se_acabou()
+
+    elif p_r == 'R' or p_r == 'r':
+        lancRecebimentos()
+        avalia_se_acabou()
+
+    else: 
+        alert('Opção Inválida, escolha novamente')
+        prompt_P_R()
+
+def avalia_se_acabou():
+    if cont == quantidade_lancamentos:
+           fecharSistema()
+    else: 
+            global cont
+            cont = cont + 1
+            chama_func_P_R()
+
+
 def main():
     bool = True
     sleep1
     py.alert(text="Cuidado com seu mouse e Teclado, o programa vai rodar!")
     sleep1
+
+    py.alert(text="Certifique-se que o everest HTML está aberto, e já está com o CAR ou no CAP aberto!")
+    py.alert(text="Você confirmou na tesouraria se esses lançamentos já foram feitos ?" )  
 
     while bool == True:
         receber_valores() 
@@ -254,21 +282,12 @@ def main():
         else: 
             bool = False
 
-    #abrirCARdoMenu()
+    quantidade_lancamentos = len(dict_lancamentos)
 
-    #py.alert(text="Você confirmou se alguns dos lançamentos já foram feitos?" )  
+    prompt_P_R()
 
-    #lancRecebimentos()
+    chama_func_P_R()
 
-    lancPagamentos() ### Adicionar algo pra limpar a caixa de condições de pagamento 
-
-    teste = py.prompt('de novo? - sim - ')
-
-    if teste == 'sim':
-        cont = cont + 1
-        main()
-
-    else: fecharSistema()  
 
 minimizaVScode()
 
