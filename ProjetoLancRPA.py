@@ -9,7 +9,8 @@ portador_atual = ''
 codigo_atual = ''
 valor_atual = ''
 obs_atual = ''
-cont = 0
+global cont 
+global p_r
 
 dict_lancamentos = [] #{'empresa': empresa_atual, 'cliente': cliente_atual, 'serie': serie_atual, 'data': data_atual, 'portador': portador_atual, 'codigo': codigo_atual, 'valor': valor_atual, 'obs': obs_atual}
 
@@ -242,8 +243,9 @@ def minimizaVScode():
 
 def prompt_P_R():
     p_r = py.prompt('Os lançamentos são pagamentos ou recebimentos? P / R')
+    return p_r 
 
-def chama_func_P_R():
+def chama_func_P_R(p_r):
     if p_r == 'P' or p_r == 'p':
         lancPagamentos()
         avalia_se_acabou()
@@ -260,7 +262,6 @@ def avalia_se_acabou():
     if cont == quantidade_lancamentos:
            fecharSistema()
     else: 
-            global cont
             cont = cont + 1
             chama_func_P_R()
 
@@ -284,9 +285,9 @@ def main():
 
     quantidade_lancamentos = len(dict_lancamentos)
 
-    prompt_P_R()
+    p_r = prompt_P_R() # talvez isso aqui funcione, não sei bem
 
-    chama_func_P_R()
+    chama_func_P_R(p_r)
 
 
 minimizaVScode()
