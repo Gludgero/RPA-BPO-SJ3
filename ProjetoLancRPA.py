@@ -9,7 +9,7 @@ portador_atual = ''
 codigo_atual = ''
 valor_atual = ''
 obs_atual = ''
-global cont 
+cont = 0
 global p_r
 
 dict_lancamentos = [] #{'empresa': empresa_atual, 'cliente': cliente_atual, 'serie': serie_atual, 'data': data_atual, 'portador': portador_atual, 'codigo': codigo_atual, 'valor': valor_atual, 'obs': obs_atual}
@@ -79,6 +79,7 @@ def abrirGoogle():
     sleep2
 
 def selectEmpresa():
+    global cont
     sleep2()
     sleep2()
     py.doubleClick()
@@ -90,6 +91,7 @@ def selectEmpresa():
 
 def selectCliente():
     ### Selecionar o cliente
+    global cont
     sleep1()
     py.press('tab')
     sleep1()
@@ -100,6 +102,7 @@ def selectCliente():
 
 def selectSerie():
      ### Selecionar a serie
+    global cont
     sleep1()
     #py.press('tab')
     #sleep1()
@@ -109,12 +112,14 @@ def selectSerie():
     sleep1()
 
 def PrintDataTab():
+    global cont
     sleep1()
     py.write(dict_lancamentos[cont]['data'])
     sleep1()
     py.press('tab')
 
 def selectPortador():
+    global cont
     # sleep1()
     # py.press('tab')
     sleep1()
@@ -124,6 +129,7 @@ def selectPortador():
     sleep1()
 
 def selectConta():
+    global cont
     ### Verificar a quantidade de tabs
     sleep1()
     py.press('tab')
@@ -134,11 +140,13 @@ def selectConta():
     sleep1()
 
 def selectValor():
+    global cont
     sleep1()
     py.write(dict_lancamentos[cont]['valor'])
     sleep1()
 
 def selectParcelas():
+    global cont
     sleep1()
     py.press('tab')
     sleep1()
@@ -150,6 +158,7 @@ def selectParcelas():
     sleep1()
 
 def selectObsRecebimentos():
+    global cont
     i = 0
     while(i != 8):
         py.press('tab')
@@ -160,6 +169,7 @@ def selectObsRecebimentos():
     sleep1()
 
 def selectObsPagamentos():
+    global cont
     i = 0
     while(i != 5):
         py.press('tab')
@@ -170,6 +180,7 @@ def selectObsPagamentos():
     sleep1()
 
 def salvaLanc():
+    global cont
     sleep1()
     #py.click(252, 209)
     sleep2()
@@ -242,31 +253,37 @@ def minimizaVScode():
     sleep2
 
 def prompt_P_R():
+    global cont
     p_r = py.prompt('Os lançamentos são pagamentos ou recebimentos? P / R')
     return p_r 
 
 def chama_func_P_R(p_r):
+    global cont
+    global quantidade_lancamentos
     if p_r == 'P' or p_r == 'p':
         lancPagamentos()
-        avalia_se_acabou()
+        avalia_se_acabou(quantidade_lancamentos, p_r)
 
     elif p_r == 'R' or p_r == 'r':
         lancRecebimentos()
-        avalia_se_acabou()
+        avalia_se_acabou(quantidade_lancamentos, p_r)
 
     else: 
-        alert('Opção Inválida, escolha novamente')
+        py.alert('Opção Inválida, escolha novamente')
         prompt_P_R()
 
-def avalia_se_acabou():
+def avalia_se_acabou(quantidade_lancamentos, p_r):
+    global cont
+    cont = cont + 1
     if cont == quantidade_lancamentos:
            fecharSistema()
     else: 
-            cont = cont + 1
-            chama_func_P_R()
+            chama_func_P_R(p_r)
 
 
 def main():
+    global cont
+    global quantidade_lancamentos
     bool = True
     sleep1
     py.alert(text="Cuidado com seu mouse e Teclado, o programa vai rodar!")
@@ -284,13 +301,14 @@ def main():
             bool = False
 
     quantidade_lancamentos = len(dict_lancamentos)
+    print(quantidade_lancamentos)
 
-    p_r = prompt_P_R() # talvez isso aqui funcione, não sei bem
+    p_r = prompt_P_R() # talvez isso aqui funcione, não sei bem usar função
 
     chama_func_P_R(p_r)
 
 
-minimizaVScode()
+###minimizaVScode()
 
 main()
 
