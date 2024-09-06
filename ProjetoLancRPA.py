@@ -16,11 +16,11 @@ dict_lancamentos = [] #{'empresa': empresa_atual, 'cliente': cliente_atual, 'ser
 
 def receber_valores():
 
-    empresa_atual = py.prompt("Digite o nome da empresa ")
-    cliente_atual = py.prompt("Digite o nome do cliente (Certifique-se que o nome escrito é exatamente como está cadastrado no sistema, caso contrário o Leo2D2 não irá encontrar)")
-    serie_atual = py.prompt("Digite a serie ")
+    empresa_atual = py.prompt("1- Burguer  3- ACM  5- O Ludico  6- Holding Fabrica","Digite o nome da empresa ")
+    cliente_atual = py.prompt("(Certifique-se que o nome escrito é exatamente como está cadastrado no sistema, caso contrário o Leo2D2 não irá encontrar)", "Digite o cliente" )
+    serie_atual = py.prompt("RPA ou DRE?", "Digite a série")
     data_atual = py.prompt("Digite a data utilizada")
-    portador_atual = py.prompt("Digite o codigo do portador")
+    portador_atual = py.prompt("4. Itaú  6. Satander  3. Banco do Brasil etc...", "Digite o codigo do portador")
     codigo_atual = py.prompt("Digite o codigo gerencial")
     valor_atual = py.prompt("Digite o valor")
     obs_atual = py.prompt("Digite a OBS")
